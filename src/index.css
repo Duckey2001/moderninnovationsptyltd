@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --color-primary: #38BDF8;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #475569;
+  --color-accent: #0284C7;
+  --color-background: #FFFFFF;
+  --color-foreground: #0F172A;
+  --color-muted: #F0F9FF;
+  --color-border: #E0F2FE;
+  --color-destructive: #DC2626;
+  --color-ring: #38BDF8;
+
+  /* Animation keyframes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(3deg); }
+  }
+  @keyframes float-fast {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 8px oklch(0.723 0.141 233.71 / 0.3); }
+    50% { box-shadow: 0 0 24px oklch(0.723 0.141 233.71 / 0.6); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes slide-up {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in-scale {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  @keyframes ping-soft {
+    0% { box-shadow: 0 0 0 0 oklch(0.723 0.141 233.71 / 0.5); }
+    70% { box-shadow: 0 0 0 12px oklch(0.723 0.141 233.71 / 0); }
+    100% { box-shadow: 0 0 0 0 oklch(0.723 0.141 233.71 / 0); }
+  }
+}
+
+/* ===== BASE STYLES ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a, button {
+  transition: all 200ms ease;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+.dark body,
+.dark,
+.dark .bg-background {
+  --color-primary: #7DD3FC;
+  --color-secondary: #94A3B8;
+  --color-accent: #38BDF8;
+  --color-background: #0C1929;
+  --color-foreground: #F0F9FF;
+  --color-muted: #0B1A28;
+  --color-border: #1E3A5F;
+}
+
+.dark {
+  background-color: #0C1929;
+  color: #F0F9FF;
+}
+
+.dark .bg-white\/90 {
+  background-color: rgba(12, 25, 41, 0.9);
+}
+
+.dark .bg-white {
+  background-color: #0B1A28;
+}
+
+.dark .text-secondary {
+  color: #94A3B8;
+}
+
+.dark .border-border {
+  border-color: #1E3A5F;
+}
+
+.dark .shadow-sm,
+.dark .shadow-md,
+.dark .shadow-lg {
+  --tw-shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark .card-interactive:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.dark .gradient-text {
+  background: linear-gradient(90deg, #7DD3FC, #38BDF8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: #0B1A28;
+  color: #F0F9FF;
+  border-color: #1E3A5F;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748B;
+}
+
+.dark .bg-muted {
+  background-color: #0B1A28;
+}
+
+.dark .glass {
+  background: rgba(12, 25, 41, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Shimmer */
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Hover lift */
+.hover-lift {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+  cursor: pointer;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px oklch(0 0 0 / 0.08);
+}
+
+/* Animations */
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+.animate-float-fast { animation: float-fast 3s ease-in-out infinite; }
+.animate-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-ping-soft { animation: ping-soft 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee:hover { animation-play-state: paused; }
+.animate-slide-up { animation: slide-up 0.5s ease-out; }
+.animate-fade-in-scale { animation: fade-in-scale 0.4s ease-out; }
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Card micro-interaction */
+.card-interactive {
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  cursor: pointer;
+}
+.card-interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px oklch(0 0 0 / 0.1);
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Gradient border card */
+.gradient-border-card {
+  position: relative;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+.gradient-border-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #38BDF8, #0EA5E9, #7DD3FC, #38BDF8);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradient-shift 4s ease infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.gradient-border-card:hover::before {
+  opacity: 1;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #38BDF8, #0EA5E9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient background */
+.bg-gradient-brand {
+  background: linear-gradient(90deg, #38BDF8, #0EA5E9);
+}
+
+/* Grid & dots patterns */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.bg-dots {
+  background-image: radial-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Slideshow transitions */
+.slide-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+.slide-exit {
+  opacity: 1;
+}
+.slide-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  a, button, .card-interactive, .hover-lift { transition: none !important; }
+  .card-interactive:hover { transform: none !important; }
+  .hover-lift:hover { transform: none !important; }
+  .animate-float, .animate-float-slow, .animate-float-fast,
+  .animate-glow, .animate-ping-soft, .animate-spin-slow,
+  .animate-marquee, .animate-slide-up, .animate-fade-in-scale,
+  .animate-gradient-shift, .shimmer { animation: none !important; }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
